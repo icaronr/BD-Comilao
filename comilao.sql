@@ -1077,7 +1077,7 @@ FROM Pedido p
 INNER JOIN PedidoProduto pp
 ON p.id_pedido = pp.Pedido_id_pedido
 INNER JOIN Produto pr
-ON pp.Produto_id_produto1 = pr.id_produto;
+ON pp.Produto_id_produto = pr.id_produto;
 
 -- produtos em estoque
 
@@ -1088,3 +1088,18 @@ WHERE p.qtd_produto_estoque > 0;
 SELECT * 
 FROM Produto p
 ORDER BY p.qtd_produto_vendidos DESC LIMIT 1;
+
+-- pagamentos
+
+SELECT *
+FROM Pedido;
+
+SELECT pg.Data, pg.Valor, pg.Hora, fp.nome_formato_pagamento, p.id_pedido
+FROM Pagamento pg
+INNER JOIN Pedido p
+ON pg.id_pagamento = p.Pagamento_id_pagamento
+INNER JOIN FormatoPagamento fp
+ON pg.FormatoPagamento_id_formato_pagamento = fp.id_formato_pagamento;
+
+
+
